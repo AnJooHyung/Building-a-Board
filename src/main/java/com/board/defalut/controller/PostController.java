@@ -34,4 +34,16 @@ public class PostController {
     public ResponseEntity<PostDetailResponse> getPost(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(postService.getPost(id));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PostDetailResponse> updatePost(@PathVariable Long id, @RequestBody @Valid PostDto.PostUpdateRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(postService.updatePost(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePost(@PathVariable Long id) {
+        postService.deletePost(id);
+        return ResponseEntity.status(HttpStatus.OK).body("게시물이 성공적으로 삭제되었습니다.");
+    }
+
 }

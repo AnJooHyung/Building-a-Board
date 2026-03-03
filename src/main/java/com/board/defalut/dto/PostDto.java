@@ -44,5 +44,13 @@ public class PostDto {
         private String content;
         private LocalDateTime created_time;
     }
+
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    public static class PostUpdateRequest {
+        private String title;
+        private String content;
+    }
 }
 

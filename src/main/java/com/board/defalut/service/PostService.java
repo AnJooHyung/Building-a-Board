@@ -59,4 +59,25 @@ public class PostService {
 
         return postDetailResponse;
     }
+    @Transactional
+    public PostDetailResponse updatePost(Long id, PostDto.PostUpdateRequest request) {
+        // DB에서 5번 게시글 Entity를 찾아온다.
+        Post post = postRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("게시글이 없습니다."));
+        // 찾은 Entity의 제목과 내용을 request에서 꺼내서 바꿔준다.
+        post.updateTitleAndContent(request.getTitle(), request.getContent());
+
+        return PostDetailResponse.builder()
+                .post_id(post.getPost_id())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .created_time(post.getCreated_time())
+                .build();
+    }
+
+    @Transactional
+    public void deletePost(Long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시글을 찾지 못했습니다."));
+
+        post.markAsDeleted();
+    }
 }
