@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Builder
@@ -19,5 +21,7 @@ public class Post {
     private String title;
 
     private String content;
+
+    private LocalDateTime created_time;
 
 }
